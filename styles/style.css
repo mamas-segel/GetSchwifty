@@ -1,0 +1,25 @@
+body {
+    padding: 10px;
+    box-sizing: border-box;
+    margin: 0;
+    gap: 10px;
+}
+
+.game-board {
+    display: grid;
+    flex-grow: 1;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 5px;
+}
+
+.game-board > .tile {
+    display: flex;
+    border: 1px solid black;
+    justify-content: center;
+    align-items: center;
+    aspect-ratio: 1 / 1;
+}
+
+.game-board > .tile:hover {
+    cursor: pointer;
+}
