@@ -1,14 +1,23 @@
 export default class Scoreboard {
     /**
-     * @param {number} maxScores 
+     * @param {number} maxScores
      */
-    constructor(maxScores) {
+    constructor(maxScores, cookie) {
         this.scores = [];
         this.maxScores = maxScores;
+        this.cookie = cookie;
     }
 
     listenScoresChanged(listener) {
         this.onScoresChanged = listener;
+    }
+
+    tryLoadFromCookie() {
+        const cookieScores = this.cookie.load(this.maxScores);
+
+        if (cookieScores) {
+            this.scores = cookieScores;
+        }
     }
 
     tryAddScore(score) {
@@ -25,6 +34,7 @@ export default class Scoreboard {
             this.scores.pop();
         }
 
+        this.cookie.update(this.scores);
         if (this.onScoresChanged) {
             this.onScoresChanged(this.scores);
         }
