@@ -1,15 +1,16 @@
 export default class GameView {
-    constructor(board, scoreboard) {
+    constructor(board, scoreboard, userInteraction) {
         this.board = board;
         this.scoreboard = scoreboard;
+        this.userInteraction = userInteraction;
     }
 
     warnInvalidMove(tileValue) {
-        alert(`Invalid Move '${tileValue}'!`);
+        this.userInteraction.showMessage(`Invalid Move '${tileValue}'!`);
     }
 
     onBoardSolved() {
-        alert("You solved the board, good job!");
+        this.userInteraction.showMessage("You solved the board, good job!");
         this.board.disableTilesClick();
     }
 
@@ -30,10 +31,10 @@ export default class GameView {
         let boardSize;
 
         while (!boardSize) {
-            let boardSizeInput = window.prompt("Enter board size (2+)");
+            let boardSizeInput = this.userInteraction.getInput("Enter board size (2+)");
 
             if (isNaN(boardSizeInput) || Number(boardSizeInput) < 2) {
-                alert(`Invalid size '${boardSizeInput}'. Please enter a valid size! (2+)`);
+                this.userInteraction.showMessage(`Invalid size '${boardSizeInput}'. Please enter a valid size! (2+)`);
             } else {
                 boardSize = Number(boardSizeInput);
             }
@@ -47,7 +48,7 @@ export default class GameView {
         let playerName;
 
         do {
-            playerName = window.prompt("Enter your player name");
+            playerName = this.userInteraction.getInput("Enter your player name");
         } while (!playerName);
 
         return playerName;
