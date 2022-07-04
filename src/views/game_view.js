@@ -1,7 +1,7 @@
 export default class GameView {
-    constructor(board) {
+    constructor(board, scoreboard) {
         this.board = board;
-        this.scoresTable = document.getElementById("scoreboard");
+        this.scoreboard = scoreboard;
     }
 
     warnInvalidMove(tileValue) {
@@ -24,25 +24,6 @@ export default class GameView {
     listenPlayAgainClicked(listener) {
         const btn = document.getElementById("play-again-btn");
         btn.onclick = listener;
-    }
-
-    displayScores(scores) {
-        while (this.scoresTable.rows.length > 1) {
-            this.scoresTable.deleteRow(1);
-        }
-
-        scores.forEach((score) => {
-            const row = this.scoresTable.insertRow();
-            const playerNameCell = row.insertCell();
-            const boardSizeCell = row.insertCell();
-            const gameLengthCell = row.insertCell();
-            const startDateCell = row.insertCell();
-
-            playerNameCell.textContent = score.playerName;
-            boardSizeCell.textContent = score.boardSize;
-            gameLengthCell.textContent = `${score.gameLength.toLocaleString()} Minutes`;
-            startDateCell.textContent = score.startDate.toLocaleString();
-        });
     }
 
     getBoardSize() {
