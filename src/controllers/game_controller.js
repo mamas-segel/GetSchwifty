@@ -31,7 +31,7 @@ export default class GameController {
      * @param {Score[]} scores 
      */
     onScoresChanged = (scores) => {
-        this.view.displayScores(scores);
+        this.view.scoreboard.displayScores(scores);
     }
 
     onTileClicked = (tileValue) => {
