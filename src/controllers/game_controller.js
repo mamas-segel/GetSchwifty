@@ -19,7 +19,7 @@ export default class GameController {
             this.game = new Game(boardBuilder.build());
         } while (!this.game.isBoardValid());
 
-        this.view.displayTiles(this.game.board.values);
+        this.view.board.displayTiles(this.game.board.values);
         this.view.listenTileClicked(this.onTileClicked);
     }
 
@@ -40,7 +40,7 @@ export default class GameController {
             return;
         }
 
-        this.view.moveTiles(tileValue);
+        this.view.board.moveTiles(tileValue);
 
         if (this.game.isBoardSolved()) {
             this.view.onBoardSolved();
