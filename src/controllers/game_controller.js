@@ -1,6 +1,4 @@
-import Game from "../models/game.js";
-import BoardBuilder from "../models/board_builder.js";
-import Score from "../models/score.js";
+import {BoardBuilder, Game, Score} from "../models/index.js";
 
 export default class GameController {
     constructor(view, scoreboard) {
