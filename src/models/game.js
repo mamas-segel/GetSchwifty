@@ -1,6 +1,7 @@
 export default class Game {
     constructor(board) {
         this.board = board;
+        this.startDate = new Date();
     }
 
     isBoardValid() {
