@@ -4,6 +4,7 @@ body {
     margin: 0;
     gap: 10px;
     min-height: 100vh;
+    text-align: center
 }
 
 table, th, td {
