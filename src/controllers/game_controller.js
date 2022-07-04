@@ -10,6 +10,9 @@ export default class GameController {
 
         this.view.listenPlayAgainClicked(this.onPlayAgainClicked);
         this.scoreboard.listenScoresChanged(this.onScoresChanged);
+
+        this.scoreboard.tryLoadFromCookie();
+        this.view.scoreboard.displayScores(this.scoreboard.scores);
     }
 
     startGame() {
