@@ -7,6 +7,10 @@ export default class Scoreboard {
         this.maxScores = maxScores;
     }
 
+    listenScoresChanged(listener) {
+        this.onScoresChanged = listener;
+    }
+
     tryAddScore(score) {
         const lastScore = this.scores[this.scores.length - 1];
 
@@ -21,6 +25,7 @@ export default class Scoreboard {
             this.scores.pop();
         }
 
+        this.onScoresChanged(this.scores);
         return true;
     }
 
