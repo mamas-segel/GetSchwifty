@@ -1,15 +1,20 @@
 export default class GameView {
     constructor() {
         this.board = document.getElementById("board");
+        this.scoresTable = document.getElementById("scoreboard");
         this.lastTileValue = 0;
-    }
-
-    onBoardSolved() {
-        alert("You solved the board, good job!");
     }
 
     warnInvalidMove(tileValue) {
         alert(`Invalid Move '${tileValue}'!`);
+    }
+
+    onBoardSolved() {
+        alert("You solved the board, good job!");
+
+        for (const tile of this.board.children) {
+            tile.onclick = null;
+        }
     }
 
     listenTileClicked(listener) {
@@ -18,6 +23,11 @@ export default class GameView {
                 listener(Number(tile.getAttribute("value")));
             }
         }
+    }
+
+    listenPlayAgainClicked(listener) {
+        const btn = document.getElementById("play-again-btn");
+        btn.onclick = listener;
     }
 
     /**
@@ -43,6 +53,25 @@ export default class GameView {
             }
 
             this.board.append(tile);
+        });
+    }
+
+    displayScores(scores) {
+        while (this.scoresTable.rows.length > 1) {
+            this.scoresTable.deleteRow(1);
+        }
+
+        scores.forEach((score) => {
+            const row = this.scoresTable.insertRow();
+            const playerNameCell = row.insertCell();
+            const boardSizeCell = row.insertCell();
+            const gameLengthCell = row.insertCell();
+            const startDateCell = row.insertCell();
+
+            playerNameCell.textContent = score.playerName;
+            boardSizeCell.textContent = score.boardSize;
+            gameLengthCell.textContent = `${score.gameLength.toLocaleString()} Minutes`;
+            startDateCell.textContent = score.startDate.toLocaleString();
         });
     }
 
@@ -87,5 +116,15 @@ export default class GameView {
 
         this.board.style.gridTemplateColumns = `repeat(${boardSize}, 1fr)`;
         return boardSize;
+    }
+
+    getPlayerName() {
+        let playerName;
+
+        do {
+            playerName = window.prompt("Enter your player name");
+        } while (!playerName);
+
+        return playerName;
     }
 }

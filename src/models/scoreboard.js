@@ -25,7 +25,9 @@ export default class Scoreboard {
             this.scores.pop();
         }
 
-        this.onScoresChanged(this.scores);
+        if (this.onScoresChanged) {
+            this.onScoresChanged(this.scores);
+        }
         return true;
     }
 
